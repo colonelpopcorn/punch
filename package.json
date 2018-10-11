@@ -1,0 +1,11 @@
+{
+  "name": "punch",
+  "version": "0.1.0",
+  "description": "A time punch cli tool.",
+  "main": "punch",
+  "author": "Jonathan Ling <jonathanling@shamrocksweb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.19.0"
+  }
+}
