@@ -1,14 +1,13 @@
 // #region "Constants"
-const path = require("path");
-const DB = require("./Database");
-const dbPath = path.resolve("." + "\\punch.db");
-const CONNECT_STR = `sqlite://${dbPath}`; // Just windows for now, I guess.
-const INSERT_PUNCH_QUERY = `
-    INSERT INTO punches VALUES (?, ?);
-`;
+import DB from "./Database";
+
 // #endregion
 
-module.exports = class Common {
+export default class Common {
+  private static readonly CONNECT_STR = "sqlite://../../punch.db"; // Just windows for now, I guess.
+  private static readonly INSERT_PUNCH_QUERY = `
+    INSERT INTO punches VALUES (?, ?);
+  `;
   static logSomething(msg, level = "log") {
     let funcToExec = console[level]; // eslint-disable-line no-console
     if (typeof funcToExec === "function") {
@@ -19,17 +18,17 @@ module.exports = class Common {
   }
   
   static getConnectionString() {
-    return CONNECT_STR;
+    return this.CONNECT_STR;
   }
 
   static getInsertPunchQuery() {
-    return INSERT_PUNCH_QUERY;
+    return this.INSERT_PUNCH_QUERY;
   }
 
   static async createPunch(typeOfPunch) {
     let nowDate = Date.now();
-    let conn = DB.getConnection(CONNECT_STR);
-    let statement = conn.prepareStatement(INSERT_PUNCH_QUERY);
+    let conn = DB.getConnection(this.CONNECT_STR);
+    let statement = conn.prepareStatement(this.INSERT_PUNCH_QUERY);
     return await statement.execute(typeOfPunch, nowDate.toString());   
   }
 }

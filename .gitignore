@@ -76,5 +76,8 @@ typings/
 # Serverless directories
 .serverless
 
+# sqlite db
+*.db
+
 
 # End of https://www.gitignore.io/api/node
