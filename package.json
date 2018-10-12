@@ -6,6 +6,7 @@
   "author": "Jonathan Ling <jonathanling@shamrocksweb.com>",
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.19.0"
+    "commander": "^2.19.0",
+    "database-js": "^3.0.8"
   }
 }
