@@ -1,0 +1,66 @@
+#!/usr/bin/env node
+
+// #region Imports
+const path = require("path");
+const program = require("commander");
+const Connection = require("database-js").Connection;
+// #endregion
+
+const dbPath = path.resolve("." + "\\punch.db");
+
+// #region Queries
+const CONNECT_STR = `sqlite://${dbPath}`; // Just windows for now, I guess.
+const INSERT_PUNCH_QUERY = `
+    INSERT INTO punches VALUES (?, ?);
+`;
+// #endregion
+
+// #region Functions
+const punchIn = async () => {
+  let result = await createPunch("IN");
+  console.log(result); // eslint-disable-line no-console  
+}
+
+const listPunches = async () => {
+
+}
+
+const punchOut = async () => {
+  let result = await createPunch("OUT");
+  console.log(result); // eslint-disable-line no-console
+}
+
+const createPunch = async (typeOfPunch) => {
+    let nowDate = Date.now();
+    let conn = getConnection(CONNECT_STR);
+    let statement = conn.prepareStatement(INSERT_PUNCH_QUERY);
+    return await statement.execute(typeOfPunch, nowDate.toString());   
+}
+
+const getConnection = (connStr) => {
+    
+}
+
+const startServer = () => {
+
+}
+// #endregion
+
+program
+    .version("0.1.0")
+    .usage("<command> [options...]")
+    .arguments("<command> [options]")
+    // #region Commands
+    .command("punch")    
+    .action(() => program.help())
+    .command("punch in", "Punch in at the current time.")
+    .action(punchIn)
+    .command("list [start] [end]", "List punches between a given start and end date.")
+    .action(listPunches)
+    .command("out", "Punch out at the current time.")
+    .action(punchOut)
+    .command("server", "Opens a web page to view and edit punches.")
+    .action(startServer)
+    // #endregion
+    .parse(process.argv);
+
