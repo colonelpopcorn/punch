@@ -1,3 +1,3 @@
 const logSomething = require("./util/Common").logSomething;
 
-logSomething("You got the punch-in tool!");
+logSomething("You got the punch-out tool!");

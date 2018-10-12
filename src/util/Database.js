@@ -1,12 +1,12 @@
-import { Connection } from "database-js";
+const Connection = require("database-js").Connection;
+const Common = require("./Common");
 
-export default class Database {
-  getConnection(connStr) {
+module.exports = class Database {
+  static getConnection(connStr) {
     try {
       return new Connection(connStr);
-    } catch (err) {
-      console.log("It's a problem") // eslint-disable-line no-console
+    } catch (error) {
+      Common.logSomething(error, "error");
     }
   }
 }
-
