@@ -1,3 +1,10 @@
-const logSomething = require("./util/Common").logSomething;
+(async function() {
+  let start = 0;
+  let end = 999999999999999;
+  const Common = require("./util/Common");
 
-logSomething("You got the punch-list tool!");
+  let results = await Common.getPunches(start, end);
+
+  Common.logSomething("Successfully got punches!!!");
+  Common.logSomething(results, "dir");
+})();

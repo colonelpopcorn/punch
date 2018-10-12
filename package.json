@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.19.0",
-    "database-js": "^3.0.8"
+    "database-js": "^3.0.8",
+    "dayjs": "^1.7.7"
   }
 }
