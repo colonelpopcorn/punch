@@ -1,3 +1,8 @@
-const logSomething = require("./util/Common").logSomething;
+(async function() {
+  const Common = require("./util/Common");
 
-logSomething("You got the punch-out tool!");
+  await Common.createPunch("OUT");
+
+  Common.logSomething("Successfully punched out!!");
+  
+})();
