@@ -12,6 +12,7 @@ program
   .command("in", "Punch in at the current time.")
   .command("list [start] [end]", "List punches between a given start and end date.")
   .command("out", "Punch out at the current time.")
+  .command("pomo", "Pomodoro timer that logs in and out to the DB.")
   .command("server", "Opens a web page to view and edit punches.")
   // #endregion
   .parse(process.argv);

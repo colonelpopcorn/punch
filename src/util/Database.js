@@ -1,5 +1,5 @@
 const Connection = require("database-js").Connection;
-const Common = require("./Common")
+const Common = require("./Common");
 
 module.exports = class Database {
   static getConnection(connStr) {

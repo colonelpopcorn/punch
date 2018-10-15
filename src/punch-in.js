@@ -3,5 +3,5 @@
 
   await Common.createPunch("IN");
 
-  Common.logSomething("Successfully punched out!!");
+  Common.logSomething("Successfully punched in!!");
 })();

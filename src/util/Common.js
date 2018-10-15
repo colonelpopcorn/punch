@@ -14,7 +14,7 @@ const INSERT_PUNCH_QUERY = `
 `;
 
 const SELECT_ALL_PUNCH_QUERY = `
-    SELECT * from punches WHERE punch_time >= ? AND punch_time <= ?
+    SELECT * from punches WHERE punch_time >= ? AND punch_time <= ?;
 `;
 // #endregion
 
@@ -36,6 +36,21 @@ module.exports = class Common {
     return INSERT_PUNCH_QUERY;
   }
 
+  static async ensureSchema() {
+    let statement;
+    let conn;
+
+    try {
+      conn = DB.getConnection(CONNECT_STR);
+      statement = conn.prepareStatement(SCHEMA_QUERY);
+      await statement.execute();
+    } catch (err) {
+      Common.logSomething(err, "error");
+    } finally {
+      conn.close();
+    }
+  }
+
   static async createPunch(typeOfPunch) {
     let results = {};
     let conn;
@@ -48,8 +63,9 @@ module.exports = class Common {
     }
     
     try {
+      await Common.ensureSchema();
       let nowDate = Date.now();
-      let statement = conn.prepareStatement(SCHEMA_QUERY + INSERT_PUNCH_QUERY);
+      let statement = conn.prepareStatement(INSERT_PUNCH_QUERY);
       results = await statement.execute(typeOfPunch, nowDate.toString());
     } catch (err) {
       Common.logSomething(err, "error");
@@ -63,14 +79,15 @@ module.exports = class Common {
     let results = {};
     let conn;
     try {
-      conn = DB.getConnection(CONNECT_STR);
+      conn = DB.getConnection(CONNECT_STR);    
     } catch (err) {
       Common.logSomething(err, "error");
       return results;
     }
     
     try {
-      let statement = conn.prepareStatement(SCHEMA_QUERY + SELECT_ALL_PUNCH_QUERY);
+      await Common.ensureSchema();
+      let statement = conn.prepareStatement(SELECT_ALL_PUNCH_QUERY);
       results = await statement.query(start, end);
     } catch (err) {
       Common.logSomething(err, "error");
