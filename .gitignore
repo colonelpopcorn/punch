@@ -82,4 +82,7 @@ typings/
 *.sqlite3
 *.db-journal
 
+# Ignore parcel dev files.
+dist/
+
 # End of https://www.gitignore.io/api/node

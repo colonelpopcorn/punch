@@ -6,7 +6,8 @@ const SCHEMA_QUERY = `
   CREATE TABLE IF NOT EXISTS punches (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     \`type\` text not null,
-    \`punch_time\` DATETIME not null
+    \`punch_time\` DATETIME not null,
+    \`message\` text
   );
 `;
 const INSERT_PUNCH_QUERY = `

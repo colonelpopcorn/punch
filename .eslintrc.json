@@ -2,12 +2,16 @@
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 8,
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
     },
     "globals":{
         "process": true,
         "require": true,
         "console": true,
+        "document": true,
         "module" : true
     }
 }
