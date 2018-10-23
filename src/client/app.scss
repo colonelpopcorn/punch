@@ -3,6 +3,9 @@ $white: white;
 $body-background-color: darkgrey;
 $border: 2px black solid;
 $grid-cols: repeat(2, [col-start] 25% [col-middle] 75% [col-end]);
+$in-color: #339933;
+$out-color: #cc0000;
+$break-color: #7300e6;
 
 * {
   box-sizing: border-box;
@@ -15,6 +18,29 @@ html, body {
 body {
   background-color: $body-background-color;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@mixin punch($color) {
+  background-color: $color;
+  color: lighten($color, 45%);
+}
+
+.punch-in {
+  @include punch($in-color);
+}
+
+.punch-out {
+  @include punch($out-color);
+}
+
+.punch-break {
+  @include punch($break-color);
+}
+
+.punch-text {
+  margin-top: 15%;
+  text-align: center;
+  overflow: hidden;
 }
 
 .punch-header {
@@ -51,6 +77,5 @@ body {
 
 .inner-child-column {
   border: $border;
-  
   grid-template-rows: 25% 100px auto;
 }

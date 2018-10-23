@@ -1,6 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+const Row = (props) => {
+  const classNameForPunch = `inner-child-column punch-${props.punchType.toLowerCase()}`
+  console.dir(classNameForPunch); // eslint-disable-line
+  return (
+    <div className="inner-child-row">
+      <div className={classNameForPunch}>
+        <div className="punch-text">{props.punchType}</div>
+      </div>
+      <div className="inner-child-column">
+        <div className="punch-text">{props.dateValue}</div>
+      </div>
+    </div>
+  );
+}
+
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -21,20 +36,17 @@ class Base extends React.Component {
           <div>{this.state.headers[1]}</div>
         </h2>
         <div class="container">
-          <div class="inner-child-row">
-            <div class="inner-child-column">IN</div>
-            <div class="inner-child-column">Three</div>
-          </div>
-          <div class="inner-child-row">Two</div>
-          <div class="inner-child-row">Three</div>
-          <div class="inner-child-row">Four</div>
-          <div class="inner-child-row">Five</div>
-          <div class="inner-child-row">Six</div>
+          <Row punchType="IN" dateValue="Four" />         
+          <Row punchType="OUT" dateValue="Four" />         
+          <Row punchType="IN" dateValue="Four" />         
+          <Row punchType="BREAK" dateValue="Four" />         
+          <Row punchType="IN" dateValue="Four" />
         </div>
       </div>
-      
     );
   }
+
+  
 }
 
 ReactDOM.render(<Base/>, document.querySelector("#punch-app"));

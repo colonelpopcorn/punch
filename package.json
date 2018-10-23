@@ -15,6 +15,7 @@
     "react-dom": "^16.5.2"
   },
   "devDependencies": {
+    "node-sass": "^4.9.4",
     "parcel": "^1.10.3"
   },
   "scripts": {
