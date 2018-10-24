@@ -63,6 +63,13 @@ body {
   grid-auto-rows: minmax(100px, auto);
 }
 
+.input-container {
+  width: 50%;
+  margin: $magic-margin;
+  display: grid;
+  grid-template-columns: $grid-cols;
+}
+
 .inner-child-row {
   display: grid;
   grid-template-columns: $grid-cols;
@@ -73,4 +80,13 @@ body {
 .inner-child-column {
   border: $border;
   grid-template-rows: 25% 100px auto;
+}
+
+.loadmask {
+  text-align: center;
+}
+
+.datepicker {
+  margin: $magic-margin;
+  width: auto;
 }

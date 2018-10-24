@@ -23,6 +23,12 @@ const Header = (props) => {
   return(
     <div>
       <h1 align="center" className="punch-header">{props.title}</h1>
+      <div className="input-container">
+        <label for="date-start">Start Date:</label>
+        <input type="date" id="date-start" clas="datepicker"></input>
+        <label for="date-end">End Date:</label>
+        <input type="date" id="date-end" clas="datepicker"></input>
+      </div>
       <h2 align="center" className="punch-grid-header">
         {props.columns.map((val, key) => {
           const someKey = `header-${key}`;
@@ -42,21 +48,38 @@ class Base extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/api/punches")
+    axios({
+      url: "/api/punches",
+      params: {
+        start: Math.floor(new Date() / 1000),
+        end: Date.now()
+      }
+    })
     .then(function(res) {
       this.setState({punches: res.data})
+    }.bind(this))
+    .catch(function() {
+      //this.setState({punches: []});
     }.bind(this));
   }
 
   render() {
     let columns = ["Type", "Time"];
-    let rows = this.state.punches.map((val, key) => {
-      const dateVal = new Date(val.punch_time);
-      return <Row punchType={val.type} dateValue={dateVal} />
-    });
+    let punches = this.state.punches;
+    let rows = [];
+    if (punches && punches.map) {
+      rows = this.state.punches.map((val, key) => {
+        const dateVal = new Date(val.punch_time);
+        return <Row punchType={val.type} dateValue={dateVal} />
+      });
+    } else {
+      rows = <p className="loadmask">Loading...</p>
+    }
     return (
       <div className="outer-container">
+        
         <Header columns={columns} title="Punch App!" />
+         
         <div className="container">
           {rows}         
         </div>

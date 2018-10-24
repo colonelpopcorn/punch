@@ -6,7 +6,9 @@ const port = 3000;
 app.use('/', express.static('dist'));
 
 app.get('/api/punches', async (req, res) => {
-  let punches = await Common.getPunches();
+  let start = req.query.start;
+  let end = req.query.end;
+  let punches = await Common.getPunches(start, end);
   res.json(punches);
 });
 

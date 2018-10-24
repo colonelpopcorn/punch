@@ -17,10 +17,13 @@
   },
   "devDependencies": {
     "node-sass": "^4.9.4",
+    "nodemon": "^1.18.4",
     "parcel": "^1.10.3"
   },
   "scripts": {
     "client:build": "parcel build ./src/client/index.html --out-dir ./dist",
-    "client:watch": "parcel ./src/client/index.html"
+    "client:serve": "parcel ./src/client/index.html",
+    "client:watch": "nodemon --watch ./src/client --exec \"npm run client:build\"",
+    "server:watch": "nodemon --watch ./src ./src/punch-server.js"
   }
 }
