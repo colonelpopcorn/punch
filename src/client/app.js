@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import dayjs from "dayjs";
+import axios from "axios";
 
 const Row = (props) => {
   const classNameForPunch = `inner-child-column punch-${props.punchType.toLowerCase()}`
@@ -35,16 +36,29 @@ const Header = (props) => {
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      punches: []      
+    }
+  }
+
+  componentDidMount() {
+    axios.get("/api/punches")
+    .then(function(res) {
+      this.setState({punches: res.data})
+    }.bind(this));
   }
 
   render() {
-    let newDate = Date.now();
     let columns = ["Type", "Time"];
+    let rows = this.state.punches.map((val, key) => {
+      const dateVal = new Date(val.punch_time);
+      return <Row punchType={val.type} dateValue={dateVal} />
+    });
     return (
       <div className="outer-container">
         <Header columns={columns} title="Punch App!" />
         <div className="container">
-          <Row punchType="IN" dateValue={newDate} />         
+          {rows}         
         </div>
       </div>
     );
