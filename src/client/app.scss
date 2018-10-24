@@ -6,6 +6,7 @@ $grid-cols: repeat(2, [col-start] 25% [col-middle] 75% [col-end]);
 $in-color: #339933;
 $out-color: #cc0000;
 $break-color: #7300e6;
+$magic-margin: 0 auto;
 
 * {
   box-sizing: border-box;
@@ -25,17 +26,11 @@ body {
   color: lighten($color, 45%);
 }
 
-.punch-in {
-  @include punch($in-color);
-}
+.punch-in { @include punch($in-color); }
 
-.punch-out {
-  @include punch($out-color);
-}
+.punch-out { @include punch($out-color); }
 
-.punch-break {
-  @include punch($break-color);
-}
+.punch-break { @include punch($break-color); }
 
 .punch-text {
   margin-top: 15%;
@@ -53,16 +48,16 @@ body {
 .punch-grid-header {
   background-color: $black;
   width: 50%;
-  margin: 0 auto;
+  margin: $magic-margin;
   color: $white;
   display: grid;
   grid-template-columns: $grid-cols;
 }
 
 .container {
-  width: 50%;
-  margin: 0 auto;
   background-color: $white;
+  width: 50%;
+  margin: $magic-margin;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-auto-rows: minmax(100px, auto);
